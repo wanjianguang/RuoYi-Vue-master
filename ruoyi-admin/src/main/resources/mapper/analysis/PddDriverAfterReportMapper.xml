@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.analysis.mapper.PddDriverAfterReportMapper">
+    
+    <resultMap type="PddDriverAfterReport" id="PddDriverAfterReportResult">       
+        <result property="pickUpDate"    column="pick_up_date"    />   
+        <result property="serviceStationName"    column="service_station_name"    />     
+        <result property="storeName"    column="store_name"    />
+        <result property="storeId"    column="store_id"    />        
+        <result property="itemType"    column="item_type"    />
+        <result property="itemName"    column="item_name"    />
+        <result property="itemNumber"    column="item_number"    />
+        <result property="itemPrice"    column="item_price"    />
+        <result property="afterRefundsNumber"    column="after_refunds_number"    />
+        <result property="afterRefundsPrice"    column="after_refunds_price"    />
+        <result property="afterSalesReasons"    column="after_sales_reasons"    />
+        <result property="afterSalesType"    column="after_sales_type"    />
+        <result property="afterRefundsTime"    column="after_refunds_time"    />
+        <result property="refundOriginator"    column="refund_originator"    />
+        <result property="driverName"    column="driver_name"    />
+        <result property="deliveryFailureReason"    column="delivery_failure_reason"    />
+        <result property="appealStatus"    column="appeal_status"    />
+        <result property="serviceStationSort"    column="service_station_sort"    />
+        <result property="serviceRoute"    column="service_route"    />
+        <result property="sorterName"    column="sorter_name"    />
+        <result property="sorterActualNumber"    column="sorter_actual_number"    />
+        <result property="sorterPiecesNumber"    column="sorter_pieces_number"    />
+        <result property="sorterStartTime"    column="sorter_start_time"    />
+        <result property="serviceStationLessNumber"    column="service_station_less_number"    />
+        <result property="serviceStationPiecesNumber"    column="service_station_pieces_number"    />
+        <result property="serviceStationManyNumber"    column="service_station_many_number"    />
+    </resultMap>
+
+    <sql id="selectPddDriverAfterReportVo">
+        select * from pdd_driver_after
+    </sql>
+        
+    <select id="selectPddDriverAfterReportList" parameterType="Date" resultMap="PddDriverAfterReportResult">
+        <include refid="selectPddDriverAfterReportVo"/>
+        <where>  
+            <if test="pickUpDate != null "> and pick_up_date = #{pickUpDate}</if>
+            and after_sales_reasons in ('缺货','少发、漏发','商家发错货')
+            and after_sales_type in ('仅退款')
+            and appeal_status not in ('中心仓审核属实')
+            and length(delivery_failure_reason) =0
+        </where>
+        order by driver_name
+    </select>
+</mapper>
