@@ -8,12 +8,12 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 司机售后报表对象 pdd_driver_after
+ * 分拣员售后报对象 pdd_sorter_after
  * 
- * @author ruoyi
- * @date 2021-08-14
+ * @author wonderful
+ * @date 2021-08-17
  */
-public class PddDriverAfter extends BaseEntity
+public class PddSorterAfter extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 

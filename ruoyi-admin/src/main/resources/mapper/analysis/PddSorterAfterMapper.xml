@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.analysis.mapper.PddDriverAfterMapper">
+<mapper namespace="com.ruoyi.analysis.mapper.PddSorterAfterMapper">
     
-    <resultMap type="PddDriverAfter" id="PddDriverAfterResult">
+    <resultMap type="PddSorterAfter" id="PddSorterAfterResult">
         <result property="id"    column="id"    />
         <result property="pickUpDate"    column="pick_up_date"    />
         <result property="serviceStationName"    column="service_station_name"    />
@@ -42,29 +42,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="serviceStationManyNumber"    column="service_station_many_number"    />
     </resultMap>
 
-    <sql id="selectPddDriverAfterVo">
-        select id, pick_up_date, service_station_name, store_id, store_name, item_type, item_id, item_name, item_number, item_price, after_refunds_number, after_refunds_price, after_refunds_ratio, after_sales_reasons, after_sales_type, after_sales_time, after_refunds_time, batch_refund, refund_originator, driver_name, driver_phone, delivery_time, delivery_failure_reason, stationmaster_item_number, operate_itme_number, appeal_status, service_station_sort, service_route, sorter_name, sorter_actual_number, sorter_pieces_number, sorter_start_time, service_station_less_number, service_station_pieces_number, service_station_many_number from pdd_driver_after
+    <sql id="selectPddSorterAfterVo">
+        select id, pick_up_date, service_station_name, store_id, store_name, item_type, item_id, item_name, item_number, item_price, after_refunds_number, after_refunds_price, after_refunds_ratio, after_sales_reasons, after_sales_type, after_sales_time, after_refunds_time, batch_refund, refund_originator, driver_name, driver_phone, delivery_time, delivery_failure_reason, stationmaster_item_number, operate_itme_number, appeal_status, service_station_sort, service_route, sorter_name, sorter_actual_number, sorter_pieces_number, sorter_start_time, service_station_less_number, service_station_pieces_number, service_station_many_number from pdd_sorter_after
     </sql>
 
-    <select id="selectPddDriverAfterList" parameterType="PddDriverAfter" resultMap="PddDriverAfterResult">
-        <include refid="selectPddDriverAfterVo"/>
+    <select id="selectPddSorterAfterList" parameterType="PddSorterAfter" resultMap="PddSorterAfterResult">
+        <include refid="selectPddSorterAfterVo"/>
         <where>  
-            <if test="pickUpDate != null "> and pick_up_date = #{pickUpDate}</if>
+            <if test="pickUpDate != null  and pickUpDate != ''"> and pick_up_date = #{pickUpDate}</if>
             <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
-            <if test="driverName != null  and driverName != ''"> and driver_name like concat('%', #{driverName}, '%')</if>
+            <if test="sorterName != null  and sorterName != ''"> and sorter_name like concat('%', #{sorterName}, '%')</if>
         </where>
-        order by id desc
     </select>
     
-    <select id="selectPddDriverAfterById" parameterType="Long" resultMap="PddDriverAfterResult">
-        <include refid="selectPddDriverAfterVo"/>
-        where id = #{id}
+    <select id="selectPddSorterAfterByStoreId" parameterType="String" resultMap="PddSorterAfterResult">
+        <include refid="selectPddSorterAfterVo"/>
+        where store_id = #{storeId}
     </select>
         
-    <insert id="insertPddDriverAfter" parameterType="PddDriverAfter" useGeneratedKeys="true" keyProperty="id">
-        insert into pdd_driver_after
+    <insert id="insertPddSorterAfter" parameterType="PddSorterAfter">
+        insert into pdd_sorter_after
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="pickUpDate != null">pick_up_date,</if>
+            <if test="id != null">id,</if>
+            <if test="pickUpDate != null and pickUpDate != ''">pick_up_date,</if>
             <if test="serviceStationName != null">service_station_name,</if>
             <if test="storeId != null">store_id,</if>
             <if test="storeName != null">store_name,</if>
@@ -100,7 +100,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="serviceStationManyNumber != null">service_station_many_number,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="pickUpDate != null">#{pickUpDate},</if>
+            <if test="id != null">#{id},</if>
+            <if test="pickUpDate != null and pickUpDate != ''">#{pickUpDate},</if>
             <if test="serviceStationName != null">#{serviceStationName},</if>
             <if test="storeId != null">#{storeId},</if>
             <if test="storeName != null">#{storeName},</if>
@@ -137,12 +138,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updatePddDriverAfter" parameterType="PddDriverAfter">
-        update pdd_driver_after
+    <update id="updatePddSorterAfter" parameterType="PddSorterAfter">
+        update pdd_sorter_after
         <trim prefix="SET" suffixOverrides=",">
-            <if test="pickUpDate != null">pick_up_date = #{pickUpDate},</if>
+            <if test="id != null">id = #{id},</if>
+            <if test="pickUpDate != null and pickUpDate != ''">pick_up_date = #{pickUpDate},</if>
             <if test="serviceStationName != null">service_station_name = #{serviceStationName},</if>
-            <if test="storeId != null">store_id = #{storeId},</if>
             <if test="storeName != null">store_name = #{storeName},</if>
             <if test="itemType != null">item_type = #{itemType},</if>
             <if test="itemId != null">item_id = #{itemId},</if>
@@ -175,17 +176,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="serviceStationPiecesNumber != null">service_station_pieces_number = #{serviceStationPiecesNumber},</if>
             <if test="serviceStationManyNumber != null">service_station_many_number = #{serviceStationManyNumber},</if>
         </trim>
-        where id = #{id}
+        where store_id = #{storeId}
     </update>
 
-    <delete id="deletePddDriverAfterById" parameterType="Long">
-        delete from pdd_driver_after where id = #{id}
+    <delete id="deletePddSorterAfterByStoreId" parameterType="String">
+        delete from pdd_sorter_after where store_id = #{storeId}
     </delete>
 
-    <delete id="deletePddDriverAfterByIds" parameterType="String">
-        delete from pdd_driver_after where id in 
-        <foreach item="id" collection="array" open="(" separator="," close=")">
-            #{id}
+    <delete id="deletePddSorterAfterByStoreIds" parameterType="String">
+        delete from pdd_sorter_after where store_id in 
+        <foreach item="storeId" collection="array" open="(" separator="," close=")">
+            #{storeId}
         </foreach>
     </delete>
 </mapper>

@@ -1,6 +1,5 @@
 package com.ruoyi.analysis.service;
 
-import java.util.Date;
 import java.util.List;
 
 import com.ruoyi.analysis.domain.PddDriverAfterReport;
@@ -16,5 +15,5 @@ public interface IPddDriverAfterReportService
     /**
      * 查出司机售后-统计数据
      */
-	public List<PddDriverAfterReport> selectPddDriverAfterReportList(Date pickUpDate);
+	public List<PddDriverAfterReport> selectPddDriverAfterReportList(String pickUpDate);
 }

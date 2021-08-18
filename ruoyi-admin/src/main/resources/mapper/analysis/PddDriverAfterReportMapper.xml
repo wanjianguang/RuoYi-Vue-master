@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select * from pdd_driver_after
     </sql>
         
-    <select id="selectPddDriverAfterReportList" parameterType="Date" resultMap="PddDriverAfterReportResult">
+    <select id="selectPddDriverAfterReportList" parameterType="String" resultMap="PddDriverAfterReportResult">
         <include refid="selectPddDriverAfterReportVo"/>
         <where>  
             <if test="pickUpDate != null "> and pick_up_date = #{pickUpDate}</if>
@@ -45,6 +45,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             and after_sales_type in ('仅退款')
             and appeal_status not in ('中心仓审核属实')
             and length(delivery_failure_reason) =0
+            and ifnull(service_station_less_number,0) =0
+            and ifnull(service_station_pieces_number,0) =0
         </where>
         order by driver_name
     </select>

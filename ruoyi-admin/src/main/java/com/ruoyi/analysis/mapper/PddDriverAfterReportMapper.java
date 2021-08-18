@@ -20,5 +20,5 @@ public interface PddDriverAfterReportMapper
      * @param pddDriverAfter 司机售后报表
      * @return 司机售后报表集合
      */
-    public List<PddDriverAfterReport> selectPddDriverAfterReportList(Date pickUpDate);
+    public List<PddDriverAfterReport> selectPddDriverAfterReportList(String pickUpDate);
 }

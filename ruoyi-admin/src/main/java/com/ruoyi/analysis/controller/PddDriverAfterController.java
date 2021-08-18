@@ -62,7 +62,7 @@ public class PddDriverAfterController extends BaseController
     @GetMapping("/export")
     public AjaxResult export(PddDriverAfter pddDriverAfter)
     {
-    	Date pickUpDate = pddDriverAfter.getPickUpDate();
+    	String pickUpDate = pddDriverAfter.getPickUpDate();
     	if(pickUpDate == null) {
     		return AjaxResult.error("【提货日期】查询条件不能为空!");
     	}
@@ -86,7 +86,7 @@ public class PddDriverAfterController extends BaseController
     	ExcelUtil<PddDriverAfter> util = new ExcelUtil<PddDriverAfter>(PddDriverAfter.class);
     	List<PddDriverAfter> list = util.importExcel(file.getInputStream());
 
-    	int row = -1;
+    	int row = 0;
     	for(PddDriverAfter pddDriverAfter:list) {
     		row += pddDriverAfterService.insertPddDriverAfter(pddDriverAfter);
     	}

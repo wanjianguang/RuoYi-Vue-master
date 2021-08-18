@@ -24,7 +24,7 @@ public class PddDriverAfterReportServiceImpl implements IPddDriverAfterReportSer
     private PddDriverAfterReportMapper pddDriverAfterReportMapper;
     
 	@Override
-	public List<PddDriverAfterReport> selectPddDriverAfterReportList(Date pickUpDate) {
+	public List<PddDriverAfterReport> selectPddDriverAfterReportList(String pickUpDate) {
 
 		return pddDriverAfterReportMapper.selectPddDriverAfterReportList(pickUpDate);
 	}

@@ -45,11 +45,11 @@ public class PddDriverAfterReport implements Serializable
     
     /** 商品件数 */
     @Excel(name = "商品件数")
-    private String itemNumber;
+    private Long itemNumber;
 
     /** 商品单价(元) */
     @Excel(name = "商品单价(元)")
-    private String itemPrice;
+    private Double itemPrice;
 
     /** 售后退款件数 */
     @Excel(name = "售后退款件数")
@@ -57,7 +57,7 @@ public class PddDriverAfterReport implements Serializable
 
     /** 退款金额(不含券) */
     @Excel(name = "退款金额（不含券）")
-    private String afterRefundsPrice;
+    private Double afterRefundsPrice;
     
     /** 售后原因 */
     @Excel(name = "售后原因")
@@ -102,11 +102,11 @@ public class PddDriverAfterReport implements Serializable
 
     /** 实际分拣件数 */
     @Excel(name = "实际分拣件数")
-    private String sorterActualNumber;
+    private Long sorterActualNumber;
 
     /** 分拣缺货件数 */
     @Excel(name = "分拣缺货件数")
-    private String sorterPiecesNumber;
+    private Long sorterPiecesNumber;
 
     /** 分拣开始时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -115,15 +115,15 @@ public class PddDriverAfterReport implements Serializable
 
     /** 服务站上报少货数 */
     @Excel(name = "服务站上报少货数")
-    private String serviceStationLessNumber;
+    private Long serviceStationLessNumber;
 
     /** 服务站上报破损数 */
     @Excel(name = "服务站上报破损数")
-    private String serviceStationPiecesNumber;
+    private Long serviceStationPiecesNumber;
 
     /** 服务站上报多货数 */
     @Excel(name = "服务站上报多货数")
-    private String serviceStationManyNumber;
+    private Long serviceStationManyNumber;
 
 	public Long getId() {
 		return id;
@@ -181,19 +181,19 @@ public class PddDriverAfterReport implements Serializable
 		this.itemName = itemName;
 	}
 
-	public String getItemNumber() {
+	public Long getItemNumber() {
 		return itemNumber;
 	}
 
-	public void setItemNumber(String itemNumber) {
+	public void setItemNumber(Long itemNumber) {
 		this.itemNumber = itemNumber;
 	}
 
-	public String getItemPrice() {
+	public Double getItemPrice() {
 		return itemPrice;
 	}
 
-	public void setItemPrice(String itemPrice) {
+	public void setItemPrice(Double itemPrice) {
 		this.itemPrice = itemPrice;
 	}
 
@@ -205,11 +205,11 @@ public class PddDriverAfterReport implements Serializable
 		this.afterRefundsNumber = afterRefundsNumber;
 	}
 
-	public String getAfterRefundsPrice() {
+	public Double getAfterRefundsPrice() {
 		return afterRefundsPrice;
 	}
 
-	public void setAfterRefundsPrice(String afterRefundsPrice) {
+	public void setAfterRefundsPrice(Double afterRefundsPrice) {
 		this.afterRefundsPrice = afterRefundsPrice;
 	}
 
@@ -293,19 +293,19 @@ public class PddDriverAfterReport implements Serializable
 		this.sorterName = sorterName;
 	}
 
-	public String getSorterActualNumber() {
+	public Long getSorterActualNumber() {
 		return sorterActualNumber;
 	}
 
-	public void setSorterActualNumber(String sorterActualNumber) {
+	public void setSorterActualNumber(Long sorterActualNumber) {
 		this.sorterActualNumber = sorterActualNumber;
 	}
 
-	public String getSorterPiecesNumber() {
+	public Long getSorterPiecesNumber() {
 		return sorterPiecesNumber;
 	}
 
-	public void setSorterPiecesNumber(String sorterPiecesNumber) {
+	public void setSorterPiecesNumber(Long sorterPiecesNumber) {
 		this.sorterPiecesNumber = sorterPiecesNumber;
 	}
 
@@ -317,27 +317,27 @@ public class PddDriverAfterReport implements Serializable
 		this.sorterStartTime = sorterStartTime;
 	}
 
-	public String getServiceStationLessNumber() {
+	public Long getServiceStationLessNumber() {
 		return serviceStationLessNumber;
 	}
 
-	public void setServiceStationLessNumber(String serviceStationLessNumber) {
+	public void setServiceStationLessNumber(Long serviceStationLessNumber) {
 		this.serviceStationLessNumber = serviceStationLessNumber;
 	}
 
-	public String getServiceStationPiecesNumber() {
+	public Long getServiceStationPiecesNumber() {
 		return serviceStationPiecesNumber;
 	}
 
-	public void setServiceStationPiecesNumber(String serviceStationPiecesNumber) {
+	public void setServiceStationPiecesNumber(Long serviceStationPiecesNumber) {
 		this.serviceStationPiecesNumber = serviceStationPiecesNumber;
 	}
 
-	public String getServiceStationManyNumber() {
+	public Long getServiceStationManyNumber() {
 		return serviceStationManyNumber;
 	}
 
-	public void setServiceStationManyNumber(String serviceStationManyNumber) {
+	public void setServiceStationManyNumber(Long serviceStationManyNumber) {
 		this.serviceStationManyNumber = serviceStationManyNumber;
 	}
 
