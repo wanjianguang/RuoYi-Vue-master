@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ruoyi.analysis.domain.PddSorterAfter;
+import com.ruoyi.analysis.domain.PddSorterAfterReport;
+import com.ruoyi.analysis.service.IPddSorterAfterReportService;
 import com.ruoyi.analysis.service.IPddSorterAfterService;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
@@ -35,6 +37,9 @@ public class PddSorterAfterController extends BaseController
 {
     @Autowired
     private IPddSorterAfterService pddSorterAfterService;
+    
+    @Autowired
+    private IPddSorterAfterReportService pddSorterAfterReportService;
 
     /**
      * 查询分拣员售后报列表
@@ -56,9 +61,17 @@ public class PddSorterAfterController extends BaseController
     @GetMapping("/export")
     public AjaxResult export(PddSorterAfter pddSorterAfter)
     {
-        List<PddSorterAfter> list = pddSorterAfterService.selectPddSorterAfterList(pddSorterAfter);
-        ExcelUtil<PddSorterAfter> util = new ExcelUtil<PddSorterAfter>(PddSorterAfter.class);
-        return util.exportExcel(list, "分拣员售后报数据");
+    	String pickUpDate = pddSorterAfter.getPickUpDate();
+    	if(pickUpDate == null) {
+    		return AjaxResult.error("【提货日期】查询条件不能为空!");
+    	}
+        List<PddSorterAfterReport> list = pddSorterAfterReportService.selectPddSorterAfterReportList(pickUpDate);
+        if(list != null && list.size() >0) {
+            ExcelUtil<PddSorterAfterReport> util = new ExcelUtil<PddSorterAfterReport>(PddSorterAfterReport.class);
+            return util.exportExcel(list, "分拣员售后报数据");
+        }else {
+        	return AjaxResult.error("【提货日期:"+pickUpDate+"】无导出的数据!");
+        }                
     }
 
     /**
